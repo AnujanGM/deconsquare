@@ -1,50 +1,47 @@
-import React from 'react'
-import { Image, Linking, StyleSheet, Text, TextInput, TouchableOpacity, View, useWindowDimensions } from 'react-native'
-import CheckBox from 'react-native-check-box'
+import React from 'react';
+import { Image, StyleSheet, Text, TextInput, TouchableOpacity, View } from 'react-native';
+import CheckBox from 'react-native-check-box';
 
-export default function index() {
-  const { width } = useWindowDimensions()
-  const isPhone = width < 768
-
+export default function index({ onForgotPassword, onLogin }: { onForgotPassword?: () => void; onLogin?: () => void }) {
   return (
-    <View style={[styles.container, isPhone && styles.containerPhone]}>
-      <View style={[styles.containerBlue, isPhone && styles.containerBluePhone]}>
-        <View style={[styles.headerRow, isPhone && styles.headerRowPhone]}>
-          <Image source={require('../../assets/logo_one.png')} style={[styles.logoOne, isPhone && styles.logoOnePhone]} />
+    <View style={styles.container}>
+      <View style={styles.containerBlue}>
+        <View style={{ paddingTop: 30, flexDirection: 'row', justifyContent: 'center' }}>
+          <Image source={require('../../assets/logo_one.png')} style={styles.logoOne} />
           <Text style={styles.textDeconsquare}>DECONSQUARE</Text>
         </View>
-        <View style={[styles.contentColumn, isPhone && styles.contentColumnPhone]}>
-          <Text style={[styles.fleetSolutionsText, isPhone && styles.fleetSolutionsTextPhone]}>Fleet Solutions</Text>
-          <Image source={require('../../assets/Landing_Blue_Backgnround.png')} style={[styles.headerImage, isPhone && styles.headerImagePhone]}></Image>
-          <Text style={[styles.bulkVehicleText, isPhone && styles.bulkVehicleTextPhone]}>Bulk Vehicle Parts. </Text>
-          <Text style={[styles.simplifiedText, isPhone && styles.simplifiedTextPhone]}>Simplified.</Text>
-          <Text style={[styles.descriptionText, isPhone && styles.descriptionTextPhone]}>Streamline your fleet maintenance with our</Text>
-          <Text style={[styles.descriptionText2, isPhone && styles.descriptionText2Phone]}>comprehensive inventory and rapid delivery network.</Text>
+        <View style={{ flexDirection: 'column', marginLeft: 60, marginTop: 5 }}>
+          <Text style={{ color: "#94A3B8", fontSize: 12 }}>Fleet Solutions</Text>
+          <Image source={require('../../assets/Landing_Blue_Backgnround.png')} style={{ height: 150, width: 250, marginTop: 15 }}></Image>
+          <Text style={{ color: 'white', fontWeight: 'bold', fontSize: 20, marginBottom: 5 }}>Bulk Vehicle Parts. </Text>
+          <Text style={{ color: '#E5A913', fontWeight: 'bold', fontSize: 20 }}>Simplified.</Text>
+          <Text style={{ color: '#CBD5E1', fontWeight: 'light', fontSize: 10, marginTop: 15 }}>Streamline your fleet maintenance with our</Text>
+          <Text style={{ color: '#CBD5E1', fontWeight: 'light', fontSize: 10, marginTop: 5 }}>comprehensive inventory and rapid delivery network.</Text>
         </View>
       </View>
-      <View style={[styles.containerWhite, isPhone && styles.containerWhitePhone]}>
-        <Text style={[styles.textWelcomeBack, isPhone && styles.textWelcomeBackPhone]}>Welcome Back</Text>
-        <Text style={[styles.subtitleText, isPhone && styles.subtitleTextPhone]}>Sign in to manage your fleet orders</Text>
-        <Text style={[styles.labelText, isPhone && styles.labelTextPhone]}>User name or email</Text>
-        <TextInput placeholder='Enter your user name or email' style={[styles.textInput, isPhone && styles.textInputPhone]} />
-        <Text style={[styles.labelPassword, isPhone && styles.labelPasswordPhone]}>Password</Text>
-        <TextInput placeholder='Enter your password' secureTextEntry style={[styles.textInput, isPhone && styles.textInputPhone]} />
-        <View style={[styles.checkboxRow, isPhone && styles.checkboxRowPhone]}>
+      <View style={styles.containerWhite}>
+        <Text style={styles.textWelcomeBack}>Welcome Back</Text>
+        <Text style={{ color: '#64748B', fontSize: 12, marginLeft: 20, marginTop: 4, paddingLeft: 20, }}>Sign in to manage your fleet orders</Text>
+        <Text style={{ color: '#334155', fontSize: 12, marginLeft: 20, marginTop: 24, paddingLeft: 20, fontWeight: 'condensedBold' }}>User name or email</Text>
+        <TextInput placeholder='Enter your user name or email' style={{ height: 30, borderColor: '#94A3B8', borderWidth: 0.25, marginLeft: 40, marginRight: 120, marginTop: 8, paddingLeft: 10, borderRadius: 5 }} />
+        <Text style={{ color: '#334155', fontSize: 12, marginLeft: 20, marginTop: 15, paddingLeft: 20, fontWeight: 'condensedBold' }}>Password</Text>
+        <TextInput placeholder='Enter your password' style={{ height: 30, borderColor: '#94A3B8', borderWidth: 0.25, marginLeft: 40, marginRight: 120, marginTop: 8, paddingLeft: 10, borderRadius: 5 }} />
+        <View style={{ flexDirection: 'row', marginTop: 10, marginLeft: 40, marginRight: 40 }}>
           <CheckBox
-            style={styles.checkbox}
+            style={{ padding: 1 }}
             onClick={() => { }}
             isChecked={false}
             checkBoxColor='#767676'
           />
-          <Text style={styles.rememberMeText}>Remember me</Text>
-          <Text style={styles.forgotPasswordText} onPress={() => Linking.openURL('https://vortextsoft.com')}> Forgot password?</Text>
+          <Text style={{ flex: 1, marginLeft: 1, padding: 5, color: '#334155', fontSize: 12 }}>Remember me</Text>
+          <Text style={{ color: 'blue', fontSize: 12, padding: 5 }} onPress={onForgotPassword}> Forgot password?</Text>
         </View>
-        <TouchableOpacity style={[styles.signInButton, isPhone && styles.signInButtonPhone]}>
-          <Text style={styles.signInButtonText}>Sign In</Text>
+        <TouchableOpacity style={{ backgroundColor: '#E5A913', height: 35, marginLeft: 40, marginRight: 120, marginTop: 20, borderRadius: 5, alignItems: 'center', justifyContent: 'center' }} onPress={onLogin}>
+          <Text style={{ color: 'white', fontWeight: 'bold' }}>Sign In</Text>
         </TouchableOpacity>
-        <View style={[styles.footerRow, isPhone && styles.footerRowPhone]}>
-          <Text style={[styles.footerText, isPhone && styles.footerTextPhone]}>{"Don't you have a fleet account?"}</Text>
-          <Text style={[styles.applyAccessText, isPhone && styles.applyAccessTextPhone]} onPress={() => Linking.openURL('https://vortextsoft.com')}>Apply for access</Text>
+        <View style={{ flexDirection: 'row', alignItems: 'center' }}>
+          <Text style={{ color: '#334155', fontSize: 12, marginTop: 15, marginLeft: 60 }}> {"Don't you have a fleet account?"} </Text>
+          <Text style={{ color: '#C4920F', marginLeft: 10, marginTop: 15, fontSize: 12 }}> Apply for access</Text>
         </View>
       </View>
     </View>
@@ -56,9 +53,6 @@ const styles = StyleSheet.create({
     flex: 1,
     flexDirection: 'row',
   },
-  containerPhone: {
-    flexDirection: 'column',
-  },
   containerBlue: {
     flex: 1,
     color: 'blue',
@@ -66,72 +60,12 @@ const styles = StyleSheet.create({
     fontWeight: 'bold',
     padding: 10,
   },
-  containerBluePhone: {
-    flex: 0.4,
-    paddingVertical: 15,
-    paddingHorizontal: 15,
-  },
   containerWhite: {
     flex: 1,
+    alignContent: 'center',
+    color: 'blue',
     backgroundColor: 'white',
-    paddingHorizontal: '8%',
-    paddingVertical: 20,
-    justifyContent: 'center',
-  },
-  containerWhitePhone: {
-    paddingHorizontal: 20,
-    paddingVertical: 30,
-  },
-  headerRow: {
-    paddingTop: 30,
-    flexDirection: 'row',
-    justifyContent: 'center',
-  },
-  headerRowPhone: {
-    paddingTop: 15,
-  },
-  contentColumn: {
-    flexDirection: 'column',
-    marginLeft: 60,
-    marginTop: 5,
-  },
-  contentColumnPhone: {
-    marginLeft: 10,
-    marginRight: 10,
-    marginTop: 10,
-    alignItems: 'center',
-  },
-  fleetSolutionsText: {
-    color: '#94A3B8',
-    fontSize: 12,
-  },
-  headerImage: {
-    height: 150,
-    width: 250,
-    marginTop: 15,
-  },
-  bulkVehicleText: {
-    color: 'white',
-    fontWeight: 'bold',
-    fontSize: 20,
-    marginBottom: 5,
-  },
-  simplifiedText: {
-    color: '#E5A913',
-    fontWeight: 'bold',
-    fontSize: 20,
-  },
-  descriptionText: {
-    color: '#CBD5E1',
-    fontWeight: '300',
-    fontSize: 10,
-    marginTop: 15,
-  },
-  descriptionText2: {
-    color: '#CBD5E1',
-    fontWeight: '300',
-    fontSize: 10,
-    marginTop: 5,
+    padding: 10,
   },
   textDeconsquare: {
     flex: 1,
@@ -143,156 +77,17 @@ const styles = StyleSheet.create({
     color: 'white',
   },
   textWelcomeBack: {
-    fontSize: 28,
-    fontWeight: 'bold',
-    marginTop: 40,
-    marginBottom: 8,
-    color: '#14304A',
-  },
-  textWelcomeBackPhone: {
     fontSize: 24,
-    marginTop: 20,
-    marginBottom: 6,
-  },
-  subtitleText: {
-    color: '#64748B',
-    fontSize: 14,
-    marginBottom: 32,
-  },
-  subtitleTextPhone: {
-    fontSize: 12,
-    marginBottom: 24,
-  },
-  labelText: {
-    color: '#334155',
-    fontSize: 13,
-    marginBottom: 8,
-    fontWeight: '600',
-  },
-  labelTextPhone: {
-    fontSize: 12,
-  },
-  textInput: {
-    height: 42,
-    borderColor: '#CBD5E1',
-    borderWidth: 1,
-    paddingHorizontal: 12,
-    borderRadius: 6,
-    fontSize: 14,
-    backgroundColor: '#F8FAFC',
-    marginBottom: 16,
-  },
-  textInputPhone: {
-    height: 40,
-    fontSize: 13,
-  },
-  labelPassword: {
-    color: '#334155',
-    fontSize: 13,
-    marginBottom: 8,
-    fontWeight: '600',
-  },
-  labelPasswordPhone: {
-    fontSize: 12,
-  },
-  checkboxRow: {
-    flexDirection: 'row',
-    alignItems: 'center',
-    marginBottom: 24,
-  },
-  checkboxRowPhone: {
-    marginBottom: 20,
-  },
-  checkbox: {
-    padding: 1,
-  },
-  rememberMeText: {
-    flex: 1,
-    marginLeft: 1,
-    padding: 5,
-    color: '#334155',
-    fontSize: 12,
-  },
-  forgotPasswordText: {
-    color: 'blue',
-    fontSize: 12,
-    padding: 5,
-  },
-  signInButton: {
-    backgroundColor: '#E5A913',
-    height: 44,
-    borderRadius: 6,
-    alignItems: 'center',
-    justifyContent: 'center',
-    marginBottom: 20,
-  },
-  signInButtonPhone: {
-    height: 42,
-  },
-  signInButtonText: {
-    color: 'white',
     fontWeight: 'bold',
-    fontSize: 16,
-  },
-  footerRow: {
-    flexDirection: 'row',
-    alignItems: 'center',
-    justifyContent: 'center',
-  },
-  footerRowPhone: {
-    flexDirection: 'column',
-    alignItems: 'center',
-  },
-  footerText: {
-    color: '#64748B',
-    fontSize: 13,
-  },
-  footerTextPhone: {
-    fontSize: 12,
-    marginBottom: 4,
-  },
-  applyAccessText: {
-    color: '#E5A913',
-    marginLeft: 6,
-    fontSize: 13,
-    fontWeight: '600',
-  },
-  applyAccessTextPhone: {
-    fontSize: 12,
-    marginLeft: 0,
+    paddingLeft: 20,
+    paddingTop: 15,
+    marginTop: 26,
+    marginLeft: 20,
+    color: '#14304A',
   },
   logoOne: {
     width: 40,
     height: 40,
     marginLeft: 50,
-  },
-  logoOnePhone: {
-    width: 32,
-    height: 32,
-    marginLeft: 0,
-  },
-  headerImagePhone: {
-    width: 180,
-    height: 120,
-  },
-  bulkVehicleTextPhone: {
-    fontSize: 18,
-    textAlign: 'center',
-  },
-  simplifiedTextPhone: {
-    fontSize: 18,
-    textAlign: 'center',
-  },
-  descriptionTextPhone: {
-    fontSize: 9,
-    textAlign: 'center',
-    marginTop: 10,
-  },
-  descriptionText2Phone: {
-    fontSize: 9,
-    textAlign: 'center',
-  },
-  fleetSolutionsTextPhone: {
-    fontSize: 11,
   }
 })
